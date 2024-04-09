@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import { useFlags } from "flagsmith/react";
 
 const API_KEY = "AIzaSyBiCJGJyrV2rE08QQQzuDF_LFHKPAnL7tk";
 
@@ -12,7 +13,6 @@ const MainSection = () => {
   const [userAnswer, setUserAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
   const [correctError, setCorrectError] = useState("");
-  const [errorSolution, setErrorSolution] = useState("");
   const [showSolution, setShowSolution] = useState(false);
   const [codeWidth, setCodeWidth] = useState("w-full md:w-1/2");
 
@@ -20,6 +20,7 @@ const MainSection = () => {
     getRandomCode();
   }, []);
 
+  const { solution } = useFlags(["solution"]);
   const getRandomCode = async () => {
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     const prompt =
@@ -45,7 +46,6 @@ const MainSection = () => {
       setShowSolution(false);
     } else {
       setCorrectError(correctAnswer);
-      setErrorSolution("Provide the correct solution here...");
       setShowSolution(true);
       setFeedback("Thanks for your attempt!");
     }
@@ -59,7 +59,7 @@ const MainSection = () => {
           Error Code Challenge
         </h2>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-blue-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-lg"
           onClick={getRandomCode}
         >
           Generate Code
@@ -73,7 +73,12 @@ const MainSection = () => {
             rows="5"
             value={currentCode}
             readOnly
-            style={{ backgroundColor: "black", color: "white" }}
+            style={{
+              backgroundColor: "black",
+              color: "white",
+              width: "500px",
+              height: "400px",
+            }}
           ></textarea>
         </div>
         <input
@@ -85,16 +90,17 @@ const MainSection = () => {
         />
         <br />
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+          className="bg-blue-500 hover:bg-green-500 r text-white font-bold py-2 px-4 rounded-lg mt-4"
           onClick={checkAnswer}
         >
           Submit
         </button>
-        <p className="font-bold mt-4 text-lg">{feedback}</p>
-        {showSolution && (
+        <p className="font-bold mt-4 text-lg text-green-400">{feedback}</p>
+        {solution.enabled && showSolution && (
           <div className="mt-4">
-            <p className="font-bold">Correct Error: {correctError}</p>
-            <p className="font-bold">Solution: {errorSolution}</p>
+            <p className="font-bold text-red-500">
+              Correct Error: {correctError}
+            </p>
           </div>
         )}
       </div>
