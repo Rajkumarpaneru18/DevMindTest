@@ -1,5 +1,5 @@
 {
-  "name": "social-sensor",
+  "name": "DevMindTest",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -17,6 +17,7 @@
     "@google/generative-ai": "^0.5.0",
     "chart.js": "^4.4.2",
     "cors": "^2.8.5",
+    "flagsmith": "^4.0.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
