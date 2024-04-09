@@ -4,14 +4,13 @@ const Header = () => {
   return (
     <header className="bg-black w-screen h-32 border-b-2 border-gray-300 flex justify-between items-center px-8 py-4">
       <div>
-        <h1 className="text-4xl font-bold text-center">
+        <h1 className="text-4xl font-bold text-center mx-60">
           <span className="text-blue-500">Dev</span>
           <span className="text-red-500">Mind</span>
           <span className="text-green-500">Test</span>
         </h1>
       </div>
 
-      {/* Navigation section */}
       <div className="flex flex-grow justify-center">
         <ul className="flex gap-10">
           <li className="text-white hover:text-purple-700 cursor-pointer">
