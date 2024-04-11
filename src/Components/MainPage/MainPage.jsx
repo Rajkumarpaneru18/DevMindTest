@@ -4,7 +4,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { useFlags } from "flagsmith/react";
 
-const API_KEY = "AIzaSyBiCJGJyrV2rE08QQQzuDF_LFHKPAnL7tk";
+const API_KEY = "YOUR_API_KEY";
 
 const genAI = new GoogleGenerativeAI(API_KEY);
 
